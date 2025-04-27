@@ -28,13 +28,15 @@ struct MyStringHash {
         
         for (int i = length - 1; i >= 0; i -= 6) {
             unsigned long long value = 0;
+            int power = 1;
             
             //process up to 6 characters in reverse order
             int start = std::max(0, i - 5);
             for (int j = i; j >= start; --j)
             {
                 HASH_INDEX_T digit = letterDigitToNumber(k[j]);
-                value = value * 36 + digit;
+                value += digit * power;
+                power *= 36;
             }
             
             w[wIndex] = value;
